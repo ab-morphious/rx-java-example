@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         fetchPostObservable()
                 .subscribeOn(Schedulers.io())
+                .flatMap((post) -> fetchCommentsObservable(post))
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(post -> fetchCommentsObservable(post))
                 .subscribe( new Observer<Post>() {
                             @Override
                             public void onSubscribe(Disposable disposable) {
@@ -58,11 +58,12 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onNext(Post post) {
                                 Log.d(TAG, "onNext: ");
+                                updatePost(post);
                             }
 
                             @Override
                             public void onError(Throwable throwable) {
-                                Log.e(TAG, "onError: ");
+                                Log.e(TAG, "onError: "+throwable.toString());
                             }
 
                             @Override
@@ -88,10 +89,8 @@ public class MainActivity extends AppCompatActivity {
     private Observable<Post> fetchCommentsObservable(final Post post) {
         return ServiceGenerator.getRequestApi().getComments(post.getId())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(comments -> {
                     post.setComments(comments);
-                    updatePost(post);
                     return Observable.just(post)
                             .subscribeOn(Schedulers.io());
                 });
