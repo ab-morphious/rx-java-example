@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 );
-        //TODO: learn map, throttleFirst, concatMap,
+        //TODO: learn map, buffer, throttleFirst, flatMap, concatMap, switchMap, etc
     }
 
     private Observable<Post> fetchPostObservable() {
