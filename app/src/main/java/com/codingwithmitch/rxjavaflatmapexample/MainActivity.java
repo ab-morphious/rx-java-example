@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(post -> fetchCommentsObservable(post))
-                .subscribe(
-                        new Observer<Post>() {
+                .subscribe( new Observer<Post>() {
                             @Override
                             public void onSubscribe(Disposable disposable) {
                                 disposables.add(disposable);
