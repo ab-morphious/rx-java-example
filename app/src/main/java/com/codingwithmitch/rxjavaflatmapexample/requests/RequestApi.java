@@ -15,7 +15,5 @@ public interface RequestApi {
     Observable<List<Post>> getPosts();
 
     @GET("posts/{id}/comments")
-    Observable<List<Comment>> getComments(
-            @Path("id") int id
-    );
+    Observable<List<Comment>> getComments(@Path("id") int id);
 }

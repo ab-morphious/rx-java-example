@@ -4,10 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.codingwithmitch.rxjavaflatmapexample.models.Comment;
+import com.codingwithmitch.rxjavaflatmapexample.models.Post;
+import com.codingwithmitch.rxjavaflatmapexample.requests.ServiceGenerator;
+
+import java.util.List;
+import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,12 +45,64 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
 
         initRecyclerView();
+        fetchPostObservable()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(post -> fetchCommentsObservable(post))
+                .subscribe(
+                        new Observer<Post>() {
+                            @Override
+                            public void onSubscribe(Disposable disposable) {
+                                disposables.add(disposable);
+                            }
 
+                            @Override
+                            public void onNext(Post post) {
+                                Log.d(TAG, "onNext: ");
+                            }
 
+                            @Override
+                            public void onError(Throwable throwable) {
+                                Log.e(TAG, "onError: ");
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        }
+                );
     }
 
+    private Observable<Post> fetchPostObservable() {
+        return ServiceGenerator.getRequestApi()
+                .getPosts()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(posts -> {
+                    adapter.setPosts(posts);
+                    return Observable.fromIterable(posts)
+                            .subscribeOn(Schedulers.io());
+                });
+    }
 
-    private void initRecyclerView(){
+    private Observable<Post> fetchCommentsObservable(final Post post) {
+        return ServiceGenerator.getRequestApi().getComments(post.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(comments -> {
+                    post.setComments(comments);
+                    updatePost(post);
+                    return Observable.just(post)
+                            .subscribeOn(Schedulers.io());
+                });
+    }
+
+    private void updatePost(Post post) {
+        adapter.updatePost(post);
+    }
+
+    private void initRecyclerView() {
         adapter = new RecyclerAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
