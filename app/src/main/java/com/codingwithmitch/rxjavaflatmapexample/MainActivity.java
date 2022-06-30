@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         fetchPostObservable()
                 .subscribeOn(Schedulers.io())
                 //Conctmap in action wooo hoo!
+                //flatMap(this::fetchCommentsObservable)
                 .concatMap(this::fetchCommentsObservable) // Observable<Post> + comments
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( new Observer<Post>() {
