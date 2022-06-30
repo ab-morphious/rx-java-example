@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         fetchPostObservable()
                 .subscribeOn(Schedulers.io())
-                .flatMap((post) -> fetchCommentsObservable(post))
+                .flatMap((post) -> fetchCommentsObservable(post)) // Observable<Post> + comments
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( new Observer<Post>() {
                             @Override
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                 );
-        //TODO: learn map, buffer, throttleFirst, flatMap, concatMap, switchMap, merge, etc
+        //TODO: learn map, buffer, throttleFirst, flatMap, concatMap, switchMap, merge , etc
     }
 
     private Observable<Post> fetchPostObservable() {
@@ -90,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
     private Observable<Post> fetchCommentsObservable(final Post post) {
         return ServiceGenerator.getRequestApi().getComments(post.getId())
                 .subscribeOn(Schedulers.io())
-                .flatMap(comments -> {
+                .map(comments -> {
                     post.setComments(comments);
-                    return Observable.just(post)
-                            .subscribeOn(Schedulers.io());
-                });
+                    return post;
+                })
+                .subscribeOn(Schedulers.io());
     }
 
     private void updatePost(Post post) {
