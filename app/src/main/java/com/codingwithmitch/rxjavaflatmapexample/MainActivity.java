@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         fetchPostObservable()
                 .subscribeOn(Schedulers.io())
-                .flatMap((post) -> fetchCommentsObservable(post)) // Observable<Post> + comments
+                //Conctmap in action wooo hoo!
+                .concatMap(this::fetchCommentsObservable) // Observable<Post> + comments
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe( new Observer<Post>() {
                             @Override
