@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import com.codingwithmitch.rxjavaflatmapexample.models.Post;
+import com.codingwithmitch.rxjavaflatmapexample.operators.Create;
 import com.codingwithmitch.rxjavaflatmapexample.operators.From;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Just;
 import com.codingwithmitch.rxjavaflatmapexample.requests.ServiceGenerator;
@@ -40,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
         From from = new From();
         disposables.add(from.fromOperator());
+
+        Create create = new Create();
+        disposables.add(create.createOperator());
 
         initRecyclerView();
         fetchPostObservable()
