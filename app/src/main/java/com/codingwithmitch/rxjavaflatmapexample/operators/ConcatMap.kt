@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
 
-class FlatMap {
+class ConcatMap {
     private val TAG = "FlatMap"
 
     var students = listOf(
@@ -16,20 +16,20 @@ class FlatMap {
         Student("Yohan", 4)
     )
 
-    fun flatMapOperator() : Disposable {
-        val flatMapDisposable = Observable.fromIterable(students)
+    fun concatMapOperator() : Disposable {
+        val concatMapDisposable = Observable.fromIterable(students)
             .subscribeOn(Schedulers.io())
-            .flatMap {
+            .concatMap {
                 val student = Student(it.name.uppercase(Locale.getDefault()), it.age)
-                return@flatMap Observable.just(student)
+                return@concatMap Observable.just(student)
             }
             .filter {
                 it.age < 25
             }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                Log.d(TAG, "flatMapOperator: "+ it.name)
+                Log.d(TAG, "concatMapOperator: "+ it.name)
             }
-        return flatMapDisposable
+        return concatMapDisposable
     }
 }
