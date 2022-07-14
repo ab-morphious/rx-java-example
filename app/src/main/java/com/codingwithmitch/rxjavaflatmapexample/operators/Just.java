@@ -12,10 +12,10 @@ import io.reactivex.schedulers.Schedulers;
 public class Just {
 
     private String TAG = "Just";
-    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Observable<String> justObservable;
 
     public Disposable justOperator() {
+        //just operator takes a max of 10 items
         justObservable = Observable.just("Abel", "Yohan", "Seli");
 
         Disposable justObserver =
@@ -29,9 +29,5 @@ public class Just {
                 );
 
         return justObserver;
-    }
-
-    public void disposeObservalbes() {
-        compositeDisposable.clear();
     }
 }

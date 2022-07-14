@@ -3,28 +3,18 @@ package com.codingwithmitch.rxjavaflatmapexample;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
-
-
-import android.os.Bundle;
-import android.util.Log;
-
-import com.codingwithmitch.rxjavaflatmapexample.models.Comment;
 import com.codingwithmitch.rxjavaflatmapexample.models.Post;
+import com.codingwithmitch.rxjavaflatmapexample.operators.From;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Just;
 import com.codingwithmitch.rxjavaflatmapexample.requests.ServiceGenerator;
-
-import java.util.List;
-import java.util.Random;
+import android.os.Bundle;
+import android.util.Log;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         Just just = new Just();
         disposables.add(just.justOperator());
+
+        From from = new From();
+        disposables.add(from.fromOperator());
 
         initRecyclerView();
         fetchPostObservable()
