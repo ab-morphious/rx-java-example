@@ -20,6 +20,7 @@ import android.util.Log;
 
 import com.codingwithmitch.rxjavaflatmapexample.models.Comment;
 import com.codingwithmitch.rxjavaflatmapexample.models.Post;
+import com.codingwithmitch.rxjavaflatmapexample.operators.Just;
 import com.codingwithmitch.rxjavaflatmapexample.requests.ServiceGenerator;
 
 import java.util.List;
@@ -43,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recycler_view);
+
+        Just just = new Just();
+        disposables.add(just.justOperator());
 
         initRecyclerView();
         fetchPostObservable()
