@@ -16,7 +16,11 @@ public class Just {
 
     public Disposable justOperator() {
         //just operator takes a max of 10 items
-        justObservable = Observable.just("Abel", "Yohan", "Seli");
+        justObservable = Observable.just(
+                "Abel",
+                "Yohan",
+                "Seli"
+        );
 
         Disposable justObserver =
                 justObservable

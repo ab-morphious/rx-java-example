@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import com.codingwithmitch.rxjavaflatmapexample.models.Post;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Create;
+import com.codingwithmitch.rxjavaflatmapexample.operators.FlatMap;
 import com.codingwithmitch.rxjavaflatmapexample.operators.From;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Just;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Map;
@@ -48,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
         Map map = new Map();
         disposables.add(map.mapOperator());
+
+        FlatMap flatMap = new FlatMap();
+        disposables.add(flatMap.flatMapOperator());
+
 
         initRecyclerView();
         fetchPostObservable()

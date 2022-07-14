@@ -13,13 +13,12 @@ class Create {
     val TAG = "Create"
     val students = arrayListOf(
         Student("Abel", 27),
-        Student("Yeshwas", 28), Student
-            ("Yaya", 29)
+        Student("Yeshwas", 28),
+        Student("Yaya", 29)
     )
 
     fun createOperator() : Disposable {
         val createObservable = Observable.create<Student> { emmiter ->
-
                 for (student in students) {
                     emmiter.onNext(student)
                 }
