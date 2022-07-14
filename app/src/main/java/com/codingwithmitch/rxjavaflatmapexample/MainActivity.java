@@ -9,6 +9,7 @@ import com.codingwithmitch.rxjavaflatmapexample.models.Post;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Create;
 import com.codingwithmitch.rxjavaflatmapexample.operators.From;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Just;
+import com.codingwithmitch.rxjavaflatmapexample.operators.Map;
 import com.codingwithmitch.rxjavaflatmapexample.requests.ServiceGenerator;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
         Create create = new Create();
         disposables.add(create.createOperator());
+
+        Map map = new Map();
+        disposables.add(map.mapOperator());
 
         initRecyclerView();
         fetchPostObservable()
