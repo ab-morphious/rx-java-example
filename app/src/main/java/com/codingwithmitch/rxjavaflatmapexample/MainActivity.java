@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import com.codingwithmitch.rxjavaflatmapexample.models.Post;
+import com.codingwithmitch.rxjavaflatmapexample.operators.ConcatMap;
 import com.codingwithmitch.rxjavaflatmapexample.operators.Create;
 import com.codingwithmitch.rxjavaflatmapexample.operators.FlatMap;
 import com.codingwithmitch.rxjavaflatmapexample.operators.From;
@@ -52,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
         FlatMap flatMap = new FlatMap();
         disposables.add(flatMap.flatMapOperator());
+
+        ConcatMap concatMap = new ConcatMap();
+        disposables.add(concatMap.concatMapOperator());
 
 
         initRecyclerView();
