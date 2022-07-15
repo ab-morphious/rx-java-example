@@ -10,9 +10,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class From {
-    val TAG = "From"
-    lateinit var fromObserver: Observer<String>
-    val names = arrayOf("Seli", "Yohan", "Abel")
+    private val TAG = "From"
+    private lateinit var fromObserver: Observer<String>
+    private val names = arrayOf("Seli", "Yohan", "Abel")
 
     fun fromOperator() : Disposable {
       val disposable: Disposable = Observable.fromArray(*names)

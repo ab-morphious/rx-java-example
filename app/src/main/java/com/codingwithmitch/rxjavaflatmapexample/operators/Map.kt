@@ -12,7 +12,7 @@ class Map {
 
     private val TAG = "Map"
 
-    var students = arrayOf<Student>(
+    private var students = arrayOf<Student>(
         Student("Abel", 27),
         Student("Yohan", 4)
     )
