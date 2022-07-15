@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         ConcatMap concatMap = new ConcatMap();
         disposables.add(concatMap.concatMapOperator());
 
+        //TODO: some more operators, zip, merge, throttle, combine...
+
 
         initRecyclerView();
         fetchPostObservable()
