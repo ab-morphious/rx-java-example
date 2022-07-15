@@ -11,7 +11,7 @@ import java.util.*
 class ConcatMap {
     private val TAG = "FlatMap"
 
-    var students = listOf(
+    private var students = listOf(
         Student("Abel", 27),
         Student("Yohan", 4)
     )

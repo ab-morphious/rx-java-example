@@ -10,8 +10,8 @@ import io.reactivex.schedulers.Schedulers
 
 
 class Create {
-    val TAG = "Create"
-    val students = arrayListOf(
+    private val TAG = "Create"
+    private val students = arrayListOf(
         Student("Abel", 27),
         Student("Yeshwas", 28),
         Student("Yaya", 29)
