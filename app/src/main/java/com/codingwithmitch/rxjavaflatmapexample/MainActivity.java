@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: Hilt
         //TODO: Brush up Retrofit
         //TODO: Brush up Room
+        //TODO: Bush up Room + Retrofit + RxJava
     }
 
     private Observable<Post> fetchPostObservable() {
