@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: learn map, buffer, throttleFirst, flatMap, concatMap, switchMap, merge , etc
         //TODO: Hilt
         //TODO: Brush up Retrofit
+        //TODO: Brush up Room
     }
 
     private Observable<Post> fetchPostObservable() {
