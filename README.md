@@ -8,4 +8,7 @@ Examples of some popular rxjava operators
 - map
 - flatMap
 - concatMap
+- switchMap
+- debounce
+- throttleFirst
 - 
