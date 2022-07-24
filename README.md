@@ -2,4 +2,5 @@
 
 Examples of some popular rxjava operators
 - just
-- create
+- create (fromArray, fromIterable)
+- 
