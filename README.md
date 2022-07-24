@@ -5,6 +5,7 @@ Examples of some popular rxjava operators
 - create (fromArray, fromIterable)
 - range
 - filter
+- reduce
 - map
 - flatMap
 - concatMap
@@ -15,3 +16,5 @@ Examples of some popular rxjava operators
 - skipLast
 - take
 - takeLast
+- distinct
+- distinctUntilChanged
