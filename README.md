@@ -11,4 +11,7 @@ Examples of some popular rxjava operators
 - switchMap
 - debounce
 - throttleFirst
-- 
+- skip
+- skipLast
+- take
+- takeLast
